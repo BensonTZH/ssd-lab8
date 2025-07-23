@@ -24,7 +24,6 @@ export default defineConfig({
         // Merge recommended rules from plugins explicitly (optional)
         ...js.configs.recommended.rules,
         ...pluginReact.configs.flat.recommended.rules,
-
         // Enable security rule(s)
         "security/detect-eval-with-expression": "error",
       },
