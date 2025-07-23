@@ -5,7 +5,6 @@ import pluginSecurity from "eslint-plugin-security";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  // Apply to JS/JSX files
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
@@ -16,15 +15,12 @@ export default defineConfig([
       react: pluginReact,
       security: pluginSecurity,
     },
-    extends: [
-      "plugin:js/recommended",           // @eslint/js recommended config
-      "plugin:react/recommended",        // react plugin recommended flat config
-    ],
+    // Spread plugin configs here instead of using string extends
     rules: {
-      // Spread recommended rules from js and react configs
+      // Spread rules from @eslint/js recommended
       ...pluginJs.configs.recommended.rules,
+      // Spread rules from react flat recommended
       ...pluginReact.configs.flat.recommended.rules,
-
       // Add security plugin rule(s)
       "security/detect-eval-with-expression": "error",
     },
