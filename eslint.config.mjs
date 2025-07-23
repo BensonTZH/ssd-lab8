@@ -1,12 +1,14 @@
+import js from "@eslint/js";
 import globals from "globals";
-import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
 import pluginSecurity from "eslint-plugin-security";
+import { defineConfig } from "eslint/config";
 
-/** @type {import('eslint').FlatConfig[]} */
-const config = [
+export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
+    plugins: { js, security: pluginSecurity, react: pluginReact },
+    extends: ["js/recommended", "plugin:react/recommended", "plugin:security/recommended"],
     languageOptions: {
       globals: globals.browser,
       parserOptions: {
@@ -17,16 +19,8 @@ const config = [
         },
       },
     },
-    plugins: {
-      security: pluginSecurity,
-      react: pluginReact,
-    },
     rules: {
-      ...pluginJs.configs.recommended.rules,
-      ...pluginReact.configs.flat.recommended.rules,
       "security/detect-eval-with-expression": "error",
     },
   },
-];
-
-export default config;
+]);
