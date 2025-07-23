@@ -31,6 +31,9 @@ jobs:
       - name: Run ESLint with SARIF output
         run: npx eslint . --format @microsoft/eslint-formatter-sarif --output-file reports/eslint-results.sarif || true
 
+      - name: List reports directory contents
+        run: ls -l reports
+
       - name: Debug ESLint Output
         run: cat reports/eslint-results.sarif || echo "No SARIF report generated"
 
